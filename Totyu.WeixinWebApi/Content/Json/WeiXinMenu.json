@@ -1,0 +1,29 @@
+﻿{
+  "button": [
+    {
+      "type": "click",
+      "name": "Hello World",
+      "key": "V1001_Hello"
+    },
+    {
+      "name": "01World",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "首页",
+          "url": "http://m.t.totyu.cn/"
+        },
+        {
+          "type": "click",
+          "name": "我的01",
+          "key": "V1001_My01"
+        },
+        {
+          "type": "click",
+          "name": "绑定账号",
+          "key": "V1001_Binding"
+        }
+      ]
+    }
+  ]
+}

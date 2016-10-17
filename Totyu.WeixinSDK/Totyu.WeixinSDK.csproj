@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{788012D0-3341-4103-A827-61821A83CFF2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Totyu.WeixinSDK</RootNamespace>
+    <AssemblyName>Totyu.WeixinSDK</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="com.totyu.LYWorld.Common">
+      <HintPath>..\Inner-dll\com.totyu.LYWorld.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="com.totyu.LYWorld.Logger">
+      <HintPath>..\Inner-dll\com.totyu.LYWorld.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="com.totyu.LYWorld.Web.Models">
+      <HintPath>..\Inner-dll\com.totyu.LYWorld.Web.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\External-dll\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External-dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Apis\01World\My01API.cs" />
+    <Compile Include="Apis\MP\AcceptMessageAPI.cs" />
+    <Compile Include="Apis\MP\BaseAPI.cs" />
+    <Compile Include="Apis\MP\BasicAPI.cs" />
+    <Compile Include="Apis\MP\CustomMenuAPI.cs" />
+    <Compile Include="Apis\MP\ReplayActiveMessageAPI.cs" />
+    <Compile Include="Apis\MP\ReplayPassiveMessageAPI.cs" />
+    <Compile Include="Apis\MP\AdminAPI.cs" />
+    <Compile Include="Entiyies\Message\BaseMessage.cs" />
+    <Compile Include="Entiyies\WeixinNews.cs" />
+    <Compile Include="GlobalContext.cs" />
+    <Compile Include="Cryptography\Cryptography.cs" />
+    <Compile Include="Cryptography\WXBizMsgCrypt.cs" />
+    <Compile Include="Entiyies\Dynamic\DynamicJson.cs" />
+    <Compile Include="Entiyies\Dynamic\DynamicXml.cs" />
+    <Compile Include="Entiyies\WeixinMessage.cs" />
+    <Compile Include="Enums\WeixinMessageType.cs" />
+    <Compile Include="Helper\ApiUrlHelper.cs" />
+    <Compile Include="Helper\CommonUtil.cs" />
+    <Compile Include="Helper\HttpClientHelper.cs" />
+    <Compile Include="Helper\RequestHelper.cs" />
+    <Compile Include="Implement\WeixinExecutor.cs" />
+    <Compile Include="Interface\IWeixinExecutor.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Entiyies\Message\PicMessage.cs" />
+    <Compile Include="Entiyies\Message\TextMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Apis\Open\OAuth2\" />
+    <Folder Include="Apis\QY\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entiyies\Message\xml\linkessmessage.xml" />
+    <Content Include="Entiyies\Message\xml\addressmessage.xml" />
+    <Content Include="Entiyies\Message\xml\shortvideomessage.xml" />
+    <Content Include="Entiyies\Message\xml\videomessage.xml" />
+    <Content Include="Entiyies\Message\xml\voicemessage.xml" />
+    <Content Include="Entiyies\Message\xml\textmessage.xml" />
+    <Content Include="Entiyies\Message\xml\picmessage.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
