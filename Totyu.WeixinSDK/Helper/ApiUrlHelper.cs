@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Totyu.WeixinSDK.Helper
+﻿namespace Totyu.WeixinSDK.Helper
 {
     /// <summary>
     /// 微信各平台api url
@@ -19,7 +13,7 @@ namespace Totyu.WeixinSDK.Helper
         /// </summary>
         public static class OpenApiUrl
         {
-            #region Basic
+            #region OAuth2
             /*
              * scope:
              * 1)snsapi_base:
@@ -41,24 +35,46 @@ namespace Totyu.WeixinSDK.Helper
             /// req.state = "wechat_sdk_demo_test";
             /// api.sendReq(req);
             /// 
+            /// scope=snsapi_login
+            /// state=WEINXIN_LOGIN
+            /// 
             /// http请求方式: GET
             /// 请求CODE
             /// </summary>
-            public static string GetCode = "https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_login&state=WEINXIN_LOGIN#wechat_redirect";
+            public static string GetCode = "https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect";
             /// <summary>
             /// step 2
             /// http请求方式: GET
             /// 通过code获取access_token
             /// </summary>
-            public static string GetAccessToken = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code=CODE&grant_type=authorization_code";
+            public static string GetAccessToken = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code";
             /// <summary>
             /// step 3
             /// http请求方式: GET
+            /// 刷新access_token（如果需要）
+            /// </summary>
+            public static string RefreshAccessToken = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={0}&grant_type=refresh_token&refresh_token={1}";
+            /// <summary>
+            /// http请求方式: GET
+            /// 检验授权凭证（access_token）是否有效（如果需要）
+            /// </summary>
+            public static string CheckAccessToken = "https://api.weixin.qq.com/sns/auth?access_token={0}";
+            /// <summary>
+            /// step 4
+            /// http请求方式: GET
             /// 获取用户个人信息（UnionID机制）
             /// </summary>
-            public static string GetUserInfo = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}";
+            public static string GetUserInfo = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}";
             #endregion
 
+            #region third
+            /// <summary>
+            /// 
+            /// </summary>
+            public static string GrantThirdToken = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={0}&pre_auth_code={1}&redirect_uri={2}";
+
+
+            #endregion
         }
 
         #endregion
@@ -160,7 +176,7 @@ namespace Totyu.WeixinSDK.Helper
 
             /// <summary>
             /// http请求方式: POST
-            /// 创建二维码ticket
+            /// 1) 创建二维码ticket
             /// 临时 {"expire_seconds": 604800, "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}
             /// 永久 {"action_name": "QR_LIMIT_SCENE", "action_info": {"scene": {"scene_id": 123}}}
             ///      {"action_name": "QR_LIMIT_STR_SCENE", "action_info": {"scene": {"scene_str": "123"}}}
@@ -169,7 +185,7 @@ namespace Totyu.WeixinSDK.Helper
 
             /// <summary>
             /// HTTP GET请求（请使用https协议）
-            /// 通过ticket换取二维码
+            /// 2) 通过ticket换取二维码
             /// </summary>
             public static string CreateQRCode = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}";
 
@@ -182,7 +198,7 @@ namespace Totyu.WeixinSDK.Helper
 
             #endregion
 
-            #region message
+            #region Message
             /*
              * 消息管理
              * http://mp.weixin.qq.com/wiki/17/f298879f8fb29ab98b2f2971d42552fd.html
@@ -288,7 +304,7 @@ namespace Totyu.WeixinSDK.Helper
             public static string CustomMenuInfo = "https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token={0}";
             #endregion
 
-            #region oauth2
+            #region OAuth2
 
             /*
              * scope:
@@ -303,9 +319,78 @@ namespace Totyu.WeixinSDK.Helper
             /// step 1(web)
             /// http请求方式: GET
             /// 用户同意授权，获取code
+            /// snsapi_userinfo
             /// </summary>
-            public static string GetCode = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-            #endregion 
+            public static string GetCodeOauth2 = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect";
+            /// <summary>
+            /// step 2
+            /// http请求方式: GET
+            /// 通过code获取access_token
+            /// </summary>
+            public static string GetAccessTokenOauth2 = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code";
+            /// <summary>
+            /// step 3
+            /// http请求方式: GET
+            /// 刷新access_token（如果需要）
+            /// </summary>
+            public static string RefreshAccessTokenOauth2 = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={1}&grant_type=refresh_token&refresh_token={2}";
+            /// <summary>
+            /// step 4
+            /// http请求方式: GET
+            /// 拉取用户信息(需scope为 snsapi_userinfo)
+            /// </summary>
+            public static string GetUserInfoOauth2 = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}";
+            #endregion
+
+            #region Pay
+            /// <summary>
+            /// http请求方式：POST
+            /// 统一下单
+            /// </summary>
+            public static string UnifiedOrder = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            /// <summary>
+            /// http请求方式：POST
+            /// 查询订单
+            /// </summary>
+            public static string QueryOrder = "https://api.mch.weixin.qq.com/pay/orderquery";
+            /// <summary>
+            /// http请求方式：POST
+            /// 查询订单
+            /// </summary>
+            public static string CloseOrder = "https://api.mch.weixin.qq.com/pay/closeorder";
+            /// <summary>
+            /// http请求方式：POST
+            /// 提交刷卡支付API
+            /// </summary>
+            public static string MicroPay = "https://api.mch.weixin.qq.com/pay/micropay";
+            /// <summary>
+            /// http请求方式：POST
+            /// 撤销订单API
+            /// </summary>
+            public static string ReversePay = "https://api.mch.weixin.qq.com/secapi/pay/reverse";
+            /// <summary>
+            /// http请求方式：POST
+            /// 申请退款
+            /// </summary>
+            public static string RefundOrder = "https://api.mch.weixin.qq.com/secapi/pay/refund";
+            /// <summary>
+            /// http请求方式：POST
+            /// 申请退款
+            /// </summary>
+            public static string RefundQuery = "https://api.mch.weixin.qq.com/pay/refundquery";
+            /// <summary>
+            /// http请求方式：POST
+            /// 下载对账单
+            /// </summary>
+            public static string Downloadbill = "https://api.mch.weixin.qq.com/pay/downloadbill";
+            /// <summary>
+            /// http请求方式：POST
+            /// 交易保障
+            /// </summary>
+            public static string ReportOrder = "https://api.mch.weixin.qq.com/payitil/report";
+
+
+            #endregion
         }
         #endregion
 

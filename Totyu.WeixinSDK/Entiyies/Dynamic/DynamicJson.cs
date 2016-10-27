@@ -80,6 +80,23 @@ namespace Totyu.WeixinSDK.Entiyies.Dynamic
                 return ToValue(XElement.Load(reader));
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static dynamic Parse(byte[] data, int offset, int count, Encoding encoding = null)
+        {
+            if (encoding == null)
+                encoding = Encoding.Unicode;
+            using (var reader = JsonReaderWriterFactory.CreateJsonReader(data, offset, count, encoding, XmlDictionaryReaderQuotas.Max, _ => { }))
+            {
+                return ToValue(XElement.Load(reader));
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

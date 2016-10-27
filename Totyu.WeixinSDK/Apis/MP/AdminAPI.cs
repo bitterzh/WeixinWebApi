@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Totyu.WeixinSDK.Entiyies.Dynamic;
+﻿using System.IO;
 using Totyu.WeixinSDK.Helper;
+using Totyu.WeixinSDK.Helper.Http;
 
 namespace Totyu.WeixinSDK.Apis.MP
 {
@@ -36,7 +36,7 @@ namespace Totyu.WeixinSDK.Apis.MP
         public static dynamic GetUserInfo(string accessToekn, string openId, string lang = "zh_CN")
         {
             var url = string.Format(ApiUrlHelper.MPApiUrl.GetUserInfo, accessToekn, openId, lang);
-            return GetAsync(url);
+            return GetJsonAsync(url);
         }
         /// <summary>
         /// 
@@ -58,5 +58,27 @@ namespace Totyu.WeixinSDK.Apis.MP
             }
             return string.Empty;
         }
+        /// <summary>
+        /// 1) 创建二维码ticket
+        /// </summary>
+        /// <param name="accessToekn"></param>
+        /// <param name="jsonData"></param>
+        /// <returns></returns>
+        public static dynamic CreateQRCodeTicket(string accessToekn, string jsonData)
+        {
+            var url = string.Format(ApiUrlHelper.MPApiUrl.CreateQRCodeTicket, accessToekn);
+            return PostJsonAsync(url, jsonData, Enums.ContentType.String);
+        }
+        /// <summary>
+        /// 2) 通过ticket换取二维码
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
+        public static Stream CreateQrcode(string ticket)
+        {
+            var url = string.Format(ApiUrlHelper.MPApiUrl.CreateQRCode, RequestUtility.UrlEncode(ticket));
+            return GetStreamAsync(url);
+        }
+
     }
 }

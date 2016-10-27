@@ -1,15 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Totyu.WeixinSDK.Helper;
+using Totyu.WeixinSDK.Enums;
+using Totyu.WeixinSDK.Helper.Http;
 
 namespace Totyu.WeixinWebApi.Tests
 {
@@ -19,7 +10,7 @@ namespace Totyu.WeixinWebApi.Tests
         [TestMethod]
         public void GetUserInfo()
         {
-            var _my01 = HttpClientHelper.HttpClientGetAsync("http://api.t.totyu.cn/api/My01Info/SearchMy01Info?userId=30080", true);
+            var _my01 = DynamicJsonSend.SendAsync("http://api.t.totyu.cn/api/My01Info/SearchMy01Info?userId=30080", null, RequestMethod.GET, ContentType.String, true);
         }
     }
 }

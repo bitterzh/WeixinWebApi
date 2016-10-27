@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,16 +60,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Annotations\EnumStringAttribute.cs" />
+    <Compile Include="Annotations\ExcludedAttribute.cs" />
+    <Compile Include="Annotations\IgnoreValueAttribute.cs" />
+    <Compile Include="Annotations\NotifyPropertyChangedInvocatorAttribute.cs" />
     <Compile Include="Apis\01World\My01API.cs" />
     <Compile Include="Apis\MP\AcceptMessageAPI.cs" />
-    <Compile Include="Apis\MP\BaseAPI.cs" />
+    <Compile Include="Apis\BaseAPI.cs" />
     <Compile Include="Apis\MP\BasicAPI.cs" />
     <Compile Include="Apis\MP\CustomMenuAPI.cs" />
+    <Compile Include="Apis\MP\JSSDKAPI.cs" />
+    <Compile Include="Apis\MP\OAuth2API.cs" />
+    <Compile Include="Apis\Pay\Business\DownloadBill.cs" />
+    <Compile Include="Apis\Pay\Business\JsApiPay.cs" />
+    <Compile Include="Apis\Pay\Business\MicroPay.cs" />
+    <Compile Include="Apis\Pay\Business\NativeNotify.cs" />
+    <Compile Include="Apis\Pay\Business\NativePay.cs" />
+    <Compile Include="Apis\Pay\Business\BaseNotify.cs" />
+    <Compile Include="Apis\Pay\Business\OrderQuery.cs" />
+    <Compile Include="Apis\Pay\Business\RefundOrder.cs" />
+    <Compile Include="Apis\Pay\Business\RefundQuery.cs" />
+    <Compile Include="Apis\Pay\Business\ResultNotify.cs" />
+    <Compile Include="Apis\Pay\WxBizPayAPI.cs" />
+    <Compile Include="Apis\Pay\WxMicroPayAPI.cs" />
+    <Compile Include="Apis\Pay\WxPayAPI.cs" />
     <Compile Include="Apis\MP\ReplayActiveMessageAPI.cs" />
     <Compile Include="Apis\MP\ReplayPassiveMessageAPI.cs" />
     <Compile Include="Apis\MP\AdminAPI.cs" />
+    <Compile Include="Apis\Open\OAuth2API.cs" />
+    <Compile Include="Apis\Pay\WxPayAPI2.cs" />
+    <Compile Include="Entiyies\IEntityBase.cs" />
+    <Compile Include="Entiyies\JsonResult\WxJsonResult.cs" />
     <Compile Include="Entiyies\Message\BaseMessage.cs" />
+    <Compile Include="Entiyies\BindableBase.cs" />
+    <Compile Include="Entiyies\Message\IBaseMessage.cs" />
+    <Compile Include="Entiyies\Message\Request\IRequestMessageBase.cs" />
+    <Compile Include="Entiyies\Message\Request\RequestMessageBase.cs" />
+    <Compile Include="Entiyies\Message\Response\IResponseMessageBase.cs" />
+    <Compile Include="Entiyies\Message\Response\IResponseMessageNoResponse.cs" />
+    <Compile Include="Entiyies\Message\Response\ResponseMessageBase.cs" />
     <Compile Include="Entiyies\WeixinNews.cs" />
+    <Compile Include="Entiyies\WxPayData.cs" />
+    <Compile Include="Enums\ContentType.cs" />
+    <Compile Include="Enums\RequestMethod.cs" />
+    <Compile Include="Enums\WeixinReturnCode.cs" />
+    <Compile Include="Exceptions\WxPayException.cs" />
+    <Compile Include="Extensions\IDictionaryExtensions.cs" />
     <Compile Include="GlobalContext.cs" />
     <Compile Include="Cryptography\Cryptography.cs" />
     <Compile Include="Cryptography\WXBizMsgCrypt.cs" />
@@ -77,18 +114,30 @@
     <Compile Include="Entiyies\WeixinMessage.cs" />
     <Compile Include="Enums\WeixinMessageType.cs" />
     <Compile Include="Helper\ApiUrlHelper.cs" />
-    <Compile Include="Helper\CommonUtil.cs" />
-    <Compile Include="Helper\HttpClientHelper.cs" />
-    <Compile Include="Helper\RequestHelper.cs" />
-    <Compile Include="Implement\WeixinExecutor.cs" />
-    <Compile Include="Interface\IWeixinExecutor.cs" />
+    <Compile Include="Helper\CommonHelper.cs" />
+    <Compile Include="Helper\Conventers\ExpandoJsonConverter.cs" />
+    <Compile Include="Helper\Conventers\JsonSetting.cs" />
+    <Compile Include="Helper\Conventers\WeixinJsonConventer.cs" />
+    <Compile Include="Helper\DESHelper.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\Http\DynamicXmlSend.cs" />
+    <Compile Include="Helper\Http\DynamicJsonSend.cs" />
+    <Compile Include="Helper\Http\CommonJsonSend.cs" />
+    <Compile Include="Helper\Http\HttpClientHelper.cs" />
+    <Compile Include="Helper\Http\HttpRequestHelper.cs" />
+    <Compile Include="Helper\AccessTokenHelper.cs" />
+    <Compile Include="Executor\WeixinExecutor.cs" />
+    <Compile Include="Executor\IWeixinExecutor.cs" />
+    <Compile Include="Helper\Http\RequestUtility.cs" />
+    <Compile Include="Helper\Http\WebClientHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\SerializerHelper.cs" />
     <Compile Include="Log\Log.cs" />
     <Compile Include="Entiyies\Message\PicMessage.cs" />
     <Compile Include="Entiyies\Message\TextMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Apis\Open\OAuth2\" />
     <Folder Include="Apis\QY\" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +148,12 @@
     <Content Include="Entiyies\Message\xml\voicemessage.xml" />
     <Content Include="Entiyies\Message\xml\textmessage.xml" />
     <Content Include="Entiyies\Message\xml\picmessage.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\json\WeiXinMenu.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entiyies\json\QRCodeModel.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

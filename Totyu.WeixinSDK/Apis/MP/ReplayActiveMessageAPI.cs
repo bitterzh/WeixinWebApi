@@ -36,7 +36,7 @@ namespace Totyu.WeixinSDK.Apis.MP
             }
             builder.Append("}");
             string _url = string.Format(ApiUrlHelper.MPApiUrl.RepayActiveText, access_token);
-            var _result = GetAsync(_url);
+            var _result = GetJsonAsync(_url);
             if (_result == null)
                 return false;
             return _result.Result.IsSuccessStatusCode;

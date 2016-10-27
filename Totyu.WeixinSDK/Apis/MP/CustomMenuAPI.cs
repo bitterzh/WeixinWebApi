@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Totyu.WeixinSDK.Helper;
+﻿using Totyu.WeixinSDK.Helper;
 
 namespace Totyu.WeixinSDK.Apis.MP
 {
@@ -9,12 +8,12 @@ namespace Totyu.WeixinSDK.Apis.MP
         /// 自定义菜单创建接口
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="content"></param>
+        /// <param name="jsonData"></param>
         /// <returns></returns>
-        public static bool Create(string accesstoken, string content)
+        public static bool Create(string accessToekn, string jsonData)
         {
-            var url = string.Format(ApiUrlHelper.MPApiUrl.CustomMenuCreate, accesstoken);
-            var result = PostStringAsync(url, content).errcode;
+            var url = string.Format(ApiUrlHelper.MPApiUrl.CustomMenuCreate, accessToekn);
+            var result = PostJsonAsync(url, jsonData, Enums.ContentType.String).errcode;
             return result == 0;
         }
 
@@ -26,7 +25,7 @@ namespace Totyu.WeixinSDK.Apis.MP
         public static dynamic Query(string accesstoken)
         {
             var url = string.Format(ApiUrlHelper.MPApiUrl.CustomMenuQuery, accesstoken);
-            return GetAsync(url);
+            return GetJsonAsync(url);
         }
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace Totyu.WeixinSDK.Apis.MP
         public static bool Delete(string accesstoken)
         {
             var url = string.Format(ApiUrlHelper.MPApiUrl.CustomMenuDelete, accesstoken);
-            var result = GetAsync(url);
+            var result = GetJsonAsync(url);
             return result.errmsg == "ok";
         }
     }

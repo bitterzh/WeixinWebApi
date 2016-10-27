@@ -2,12 +2,17 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Totyu.WeixinSDK.Helper;
+using Totyu.WeixinSDK.Enums;
+using Totyu.WeixinSDK.Helper.Http;
 
 namespace Totyu.WeixinSDK
 {
     public static class GlobalContext
     {
+        /// <summary>
+        /// 10秒
+        /// </summary>
+        public const int TIME_OUT = 10;
         public static string Token { set; get; }
         public static string EncodingAESKey { set; get; }
         public static string AppID { set; get; }
@@ -17,6 +22,14 @@ namespace Totyu.WeixinSDK
         public static string Domain { set; get; }
         public static string WeixinDomain { set; get; }
 
+        #region pay
+        public static string PartnerKey { set; get; }
+        public static string MCHId { set; get; }
+        public static string DeviceInfo { set; get; }
+        public static string SpbillCreateIp { set; get; }
+        public static int Report_Levenl { set; get; }
+        public static string PayNotifyUrl { set; get; }
+        #endregion
 
         #region http request header help
 
@@ -56,7 +69,7 @@ namespace Totyu.WeixinSDK
         public static double GetServiceOADate()
         {
             var url = "http://api.t.totyu.cn/api/Common/GetServiceOADate";
-            return HttpClientHelper.HttpClientGetAsync(url);
+            return DynamicJsonSend.SendAsync(url, null, RequestMethod.GET, ContentType.String);
         }
 
         ///   <summary> 

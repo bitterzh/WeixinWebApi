@@ -1,4 +1,5 @@
 ﻿using Totyu.WeixinSDK.Apis.MP;
+using Totyu.WeixinSDK.Helper;
 
 namespace Totyu.WeixinWebApi
 {
@@ -15,13 +16,16 @@ namespace Totyu.WeixinWebApi
         public static string WebAccessToken { set; get; }
         public static string PartnerKey { private set; get; }
         public static string Domain { private set; get; }
+        public static string APIDomain { private set; get; }
         public static string WeixinDomain { set; get; }
         public static string mch_id { private set; get; }
-        public static string device_info { private set; get; }
-        public static string spbill_create_ip { private set; get; }
+        public static string DeviceInfo { private set; get; }
+        public static string SpbillCreateIp { private set; get; }
         public static string OauthScope { private set; get; }
+        public static int Report_Levenl { set; get; }
+        public static string PayNotifyUrl { set; get; }
 
-        //public static TokenHelper TokenHelper { private set; get; }
+        public static AccessTokenHelper AccessTokenHelper { private set; get; }
 
         public static void Register()
         {
@@ -31,11 +35,15 @@ namespace Totyu.WeixinWebApi
             AppSecret = System.Configuration.ConfigurationManager.AppSettings["AppSecret"];
             PartnerKey = System.Configuration.ConfigurationManager.AppSettings["PartnerKey"];
             Domain = System.Configuration.ConfigurationManager.AppSettings["Domain"];
+            APIDomain = System.Configuration.ConfigurationManager.AppSettings["APIDomain"];
             mch_id = System.Configuration.ConfigurationManager.AppSettings["mch_id"];
-            device_info = System.Configuration.ConfigurationManager.AppSettings["device_info"];
-            spbill_create_ip = System.Configuration.ConfigurationManager.AppSettings["spbill_create_ip"];
+            DeviceInfo = System.Configuration.ConfigurationManager.AppSettings["device_info"];
+            SpbillCreateIp = System.Configuration.ConfigurationManager.AppSettings["spbill_create_ip"];
             var openJSSDK = int.Parse(System.Configuration.ConfigurationManager.AppSettings["OpenJSSDK"]) > 0;
             OauthScope = System.Configuration.ConfigurationManager.AppSettings["OauthScope"];
+            Report_Levenl = int.Parse(System.Configuration.ConfigurationManager.AppSettings["Report_Levenl"]);
+            PayNotifyUrl = System.Configuration.ConfigurationManager.AppSettings["PayNotifyUrl"];
+
             WeixinDomain = "";
             AccessToken = BasicAPI.GetAccessToken(AppID, AppSecret).access_token;
 
@@ -44,8 +52,14 @@ namespace Totyu.WeixinWebApi
             WeixinSDK.GlobalContext.AccessToken = AccessToken;
             WeixinSDK.GlobalContext.WebAccessToken = WebAccessToken;
             WeixinSDK.GlobalContext.Domain = Domain;
-            //TokenHelper = new TokenHelper(6000, AppID, AppSecret, openJSSDK);
-            //TokenHelper.Run();
+            WeixinSDK.GlobalContext.MCHId = mch_id;
+            WeixinSDK.GlobalContext.PartnerKey = PartnerKey;
+            WeixinSDK.GlobalContext.DeviceInfo = DeviceInfo;
+            WeixinSDK.GlobalContext.SpbillCreateIp = SpbillCreateIp;
+            WeixinSDK.GlobalContext.Report_Levenl = Report_Levenl;
+            WeixinSDK.GlobalContext.PayNotifyUrl = PayNotifyUrl;
+            AccessTokenHelper = new AccessTokenHelper(6000, AppID, AppSecret, openJSSDK);
+            AccessTokenHelper.Run();
         }
     }
 }

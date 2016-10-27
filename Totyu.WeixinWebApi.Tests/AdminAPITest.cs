@@ -10,8 +10,8 @@ namespace Totyu.WeixinWebApi.Tests
         [TestMethod]
         public void GetUserInfo()
         {
-            var userInfo = AdminAPI.GetUserInfo(WeixinConfig.AccessToken, "oKFB8v0Svn1KTl5h_yRJvr6b2FyY");
-            var unionId = AdminAPI.GetUnionId(WeixinConfig.AccessToken, "oKFB8v0Svn1KTl5h_yRJvr6b2FyY");
+            var userInfo = AdminAPI.GetUserInfo(WeixinConfig.AccessTokenHelper.GetToken(), "oKFB8v0Svn1KTl5h_yRJvr6b2FyY");
+            var unionId = AdminAPI.GetUnionId(WeixinConfig.AccessTokenHelper.GetToken(), "oKFB8v0Svn1KTl5h_yRJvr6b2FyY");
         }
     }
 }

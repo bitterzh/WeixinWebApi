@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace Totyu.WeixinSDK.Entiyies.Dynamic
@@ -9,10 +10,13 @@ namespace Totyu.WeixinSDK.Entiyies.Dynamic
     public class DynamicXml : DynamicObject, IEnumerable
     {
         private readonly List<XElement> _elements;
+        private static string m_XmlString;
+        public string XmlString { get { return m_XmlString; } }
 
         public DynamicXml(string text)
         {
             var doc = XDocument.Parse(text);
+            m_XmlString = text;
             _elements = new List<XElement> { doc.Root };
         }
 
@@ -59,6 +63,16 @@ namespace Totyu.WeixinSDK.Entiyies.Dynamic
         {
             foreach (var element in _elements)
                 yield return new DynamicXml(element);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder _sb = new StringBuilder();
+            foreach (var elem in _elements)
+            {
+                _sb.Append(elem.ToString());
+            }
+            return _sb.ToString();
         }
     }
 }

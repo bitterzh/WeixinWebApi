@@ -102,6 +102,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\weixin\jweixin-1.0.0.js" />
+    <Content Include="Content\js\weixin\weixinJSSDK.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -110,24 +113,53 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\OpenOAuthAuthorizeAttribute.cs" />
+    <Compile Include="Attributes\WeixinOAuthAuthorizeAttribute.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomMenuController.cs" />
+    <Compile Include="Controllers\OAuth2Controller.cs" />
+    <Compile Include="Controllers\OpenController.cs" />
+    <Compile Include="Controllers\WeixinPay2Controller.cs" />
+    <Compile Include="Controllers\WeixinPayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EncryptPostModel.cs" />
+    <Compile Include="Models\ImageResult.cs" />
     <Compile Include="Models\PostModel.cs" />
     <Compile Include="Models\WeixinResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthorizationManager.cs" />
     <Compile Include="WeixinConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Content\Json\WeiXinMenu.json" />
-    <Content Include="Content\Json\LoginModel.json" />
+    <Content Include="Content\json\WeiXinMenu.json" />
+    <Content Include="Content\json\LoginModel.json" />
     <None Include="Properties\PublishProfiles\weixinapitest.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\WeixinPay\Modes.cshtml" />
+    <Content Include="Views\WeixinPay\Product.cshtml" />
+    <Content Include="Views\WeixinPay\MicroPay.cshtml" />
+    <Content Include="Views\WeixinPay\NativePay.cshtml" />
+    <Content Include="Views\WeixinPay\OrderQuery.cshtml" />
+    <Content Include="Views\WeixinPay\RefundOrder.cshtml" />
+    <Content Include="Views\WeixinPay\RefundQuery.cshtml" />
+    <Content Include="Views\WeixinPay\DownloadBill.cshtml" />
+    <Content Include="Views\WeixinPay\ReportOrder.cshtml" />
+    <Content Include="Views\WeixinPay\JsApiPay.cshtml" />
+    <Content Include="Views\WeixinPay2\DownloadBill.cshtml" />
+    <Content Include="Views\WeixinPay2\JsApiPay.cshtml" />
+    <Content Include="Views\WeixinPay2\MicroPay.cshtml" />
+    <Content Include="Views\WeixinPay2\Index.cshtml" />
+    <Content Include="Views\WeixinPay2\NativePay.cshtml" />
+    <Content Include="Views\WeixinPay2\OrderQuery.cshtml" />
+    <Content Include="Views\WeixinPay2\RefundOrder.cshtml" />
+    <Content Include="Views\WeixinPay2\RefundQuery.cshtml" />
+    <Content Include="Views\WeixinPay2\ReportOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -137,7 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Totyu.WeixinSDK\Totyu.WeixinSDK.csproj">

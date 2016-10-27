@@ -29,9 +29,8 @@ namespace Totyu.WeixinSDK.Apis.MP
                                 "<CreateTime>{2}</CreateTime>" +
                                 "<MsgType><![CDATA[text]]></MsgType>" +
                                 "<Content><![CDATA[{3}]]></Content></xml>",
-            toUserName, fromUserName, CommonUtil.CreateTimestamp(), content);
+            toUserName, fromUserName, CommonHelper.CreateTimestamp(), content);
         }
-
         /// <summary>
         /// 回复单图文消息
         /// </summary>
@@ -47,7 +46,7 @@ namespace Totyu.WeixinSDK.Apis.MP
                                         "<CreateTime>{2}</CreateTime>" +
                                         "<MsgType><![CDATA[news]]></MsgType>" +
                                         "<ArticleCount>{3}</ArticleCount><Articles>",
-                            toUserName, fromUserName, CommonUtil.CreateTimestamp(), 1
+                            toUserName, fromUserName, CommonHelper.CreateTimestamp(), 1
             ));
             builder.Append(string.Format("<item><Title><![CDATA[{0}]]></Title>" +
                                         "<Description><![CDATA[{1}]]></Description>" +
@@ -59,7 +58,6 @@ namespace Totyu.WeixinSDK.Apis.MP
             builder.Append("</Articles></xml>");
             return builder.ToString();
         }
-
         /// <summary>
         /// 回复多图文消息
         /// </summary>
@@ -76,7 +74,7 @@ namespace Totyu.WeixinSDK.Apis.MP
                                         "<MsgType><![CDATA[news]]></MsgType>" +
                                         "<ArticleCount>{3}</ArticleCount><Articles>",
                             toUserName, fromUserName,
-                            CommonUtil.CreateTimestamp(),
+                            CommonHelper.CreateTimestamp(),
                             news.Count)
              );
             foreach (var c in news)
@@ -106,7 +104,7 @@ namespace Totyu.WeixinSDK.Apis.MP
                                 "<CreateTime>{2}</CreateTime>" +
                                 "<MsgType><![CDATA[image]]></MsgType>" +
                                 "<Image><MediaId><![CDATA[{3}]]></MediaId></Image></xml>",
-                    toUserName, fromUserName, CommonUtil.CreateTimestamp(), media_id);
+                    toUserName, fromUserName, CommonHelper.CreateTimestamp(), media_id);
         }
         /// <summary>
         /// 回复语音消息
@@ -122,7 +120,7 @@ namespace Totyu.WeixinSDK.Apis.MP
                                 "<CreateTime>{2}</CreateTime>" +
                                 "<MsgType><![CDATA[voice]]></MsgType>" +
                                 "<Voice><MediaId><![CDATA[{3}]]></MediaId></Voice></xml>",
-                    toUserName, fromUserName, CommonUtil.CreateTimestamp(), media_id);
+                    toUserName, fromUserName, CommonHelper.CreateTimestamp(), media_id);
         }
         /// <summary>
         /// 回复视频消息
@@ -142,9 +140,8 @@ namespace Totyu.WeixinSDK.Apis.MP
                                 "<Video><MediaId><![CDATA[{3}]]></MediaId>" +
                                 "<Title><![CDATA[{4}]]></Title>" +
                                 "<Description><![CDATA[{5}]]></Description></Video></xml>",
-                                toUserName, fromUserName, CommonUtil.CreateTimestamp(), media_id, title, description);
+                                toUserName, fromUserName, CommonHelper.CreateTimestamp(), media_id, title, description);
         }
-
         /// <summary>
         /// 回复音乐消息
         /// </summary>
@@ -169,7 +166,52 @@ namespace Totyu.WeixinSDK.Apis.MP
                                 "<HQMusicUrl><![CDATA[{6}]]></HQMusicUrl>" +
                                 "<ThumbMediaId><![CDATA[{7}]]></ThumbMediaId>" +
                                 "</Music></xml>",
-                                toUserName, fromUserName, CommonUtil.CreateTimestamp(), title, description, musicUrl, hqMusicUrl, thumb_media_id);
+                                toUserName, fromUserName, CommonHelper.CreateTimestamp(), title, description, musicUrl, hqMusicUrl, thumb_media_id);
+        }
+
+        /// <summary>
+        /// 回复音乐消息
+        /// </summary>
+        /// <param name="toUserName"></param>
+        /// <param name="fromUserName"></param>
+        /// <param name="title">音乐标题</param>
+        /// <param name="description">音乐描述</param>
+        /// <param name="musicUrl">音乐链接</param>
+        /// <param name="hqMusicUrl">高质量音乐链接，WIFI环境优先使用该链接播放音乐</param>
+        /// <param name="thumb_media_id">缩略图的媒体id，通过上传多媒体文件，得到的id</param>
+        /// <returns></returns>
+        public static string ReplayNoQRCode(string toUserName, string fromUserName, string sceneID, string ticket)
+        {
+            return string.Format("<xml><ToUserName><![CDATA[{0}]]></ToUserName>" +
+                                "<FromUserName><![CDATA[{1}]]></FromUserName>" +
+                                "<CreateTime>{2}</CreateTime>" +
+                                "<MsgType><![CDATA[event]]></MsgType>" +
+                                "<Event><![CDATA[subscribe]]></Event>" +
+                                "<EventKey><![CDATA[qrscene_{3}]]></EventKey>" +
+                                "<Ticket><![CDATA[{4}]]></Ticket></xml>",
+                                toUserName, fromUserName, CommonHelper.CreateTimestamp(), sceneID, ticket);
+        }
+        /// <summary>
+        /// 回复音乐消息
+        /// </summary>
+        /// <param name="toUserName"></param>
+        /// <param name="fromUserName"></param>
+        /// <param name="title">音乐标题</param>
+        /// <param name="description">音乐描述</param>
+        /// <param name="musicUrl">音乐链接</param>
+        /// <param name="hqMusicUrl">高质量音乐链接，WIFI环境优先使用该链接播放音乐</param>
+        /// <param name="thumb_media_id">缩略图的媒体id，通过上传多媒体文件，得到的id</param>
+        /// <returns></returns>
+        public static string ReplayQRCode(string toUserName, string fromUserName, string sceneID, string ticket)
+        {
+            return string.Format("<xml><ToUserName><![CDATA[{0}]]></ToUserName>" +
+                                "<FromUserName><![CDATA[{1}]]></FromUserName>" +
+                                "<CreateTime>{2}</CreateTime>" +
+                                "<MsgType><![CDATA[event]]></MsgType>" +
+                                "<Event><![CDATA[SCAN]]></Event>" +
+                                "<EventKey><![CDATA[{3}]]></EventKey>" +
+                                "<Ticket><![CDATA[{4}]]></Ticket></xml>",
+                                toUserName, fromUserName, CommonHelper.CreateTimestamp(), sceneID, ticket);
         }
     }
 }

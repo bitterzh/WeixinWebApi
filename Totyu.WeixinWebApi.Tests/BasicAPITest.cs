@@ -20,7 +20,7 @@ namespace Totyu.WeixinWebApi.Tests
         [TestMethod]
         public void GetCallbackIP()
         {
-            BasicAPI.GetCallbackIP(WeixinConfig.AccessToken);
+            BasicAPI.GetCallbackIP(WeixinConfig.AccessTokenHelper.GetToken());
         }
 
 

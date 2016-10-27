@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Totyu.WeixinSDK.Helper;
 
 namespace Totyu.WeixinSDK.Apis.MP
@@ -47,7 +44,7 @@ namespace Totyu.WeixinSDK.Apis.MP
         public static dynamic GetAccessToken(string appid, string secrect)
         {
             var url = string.Format(ApiUrlHelper.MPApiUrl.GetAccessToken, "client_credential", appid, secrect);
-            return GetAsync(url);
+            return GetJsonAsync(url);
         }
         /// <summary>
         /// 获取微信服务器IP地址
@@ -55,10 +52,22 @@ namespace Totyu.WeixinSDK.Apis.MP
         /// </summary>
         /// <param name="access_token"></param>
         /// <returns>{"ip_list":["127.0.0.1","127.0.0.1"]}</returns>
-        public static dynamic GetCallbackIP(string access_token)
+        public static dynamic GetCallbackIP(string accessToekn)
         {
-            var url = string.Format(ApiUrlHelper.MPApiUrl.GetCallbackIP, access_token);
-            return GetAsync(url);
+            var url = string.Format(ApiUrlHelper.MPApiUrl.GetCallbackIP, accessToekn);
+            return GetJsonAsync(url);
+        }
+        /// <summary>
+        /// 长链接转短链接接口
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="jsonData"></param>
+        /// <returns></returns>
+
+        public static dynamic ShortUrl(string accessToekn, string jsonData)
+        {
+            var url = string.Format(ApiUrlHelper.MPApiUrl.ShortUrl, accessToekn);
+            return PostJsonAsync(url, jsonData, Enums.ContentType.String);
         }
     }
 }

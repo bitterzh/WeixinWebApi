@@ -8,8 +8,8 @@ namespace Totyu.WeixinWebApi.Controllers
         // GET: CustomMenu
         public ActionResult Create()
         {
-            var json = System.IO.File.ReadAllText(Server.MapPath("/Content/Json/WeiXinMenu.json"));
-            bool _result = CustomMenuAPI.Create(WeixinConfig.AccessToken, json);
+            var json = System.IO.File.ReadAllText(Server.MapPath("/Content/json/WeiXinMenu.json"));
+            bool _result = CustomMenuAPI.Create(WeixinConfig.AccessTokenHelper.GetToken(), json);
             if (!_result)
                 return Content("menu创建错误！");
             return Content(json);
@@ -17,7 +17,7 @@ namespace Totyu.WeixinWebApi.Controllers
 
         public ActionResult Delete()
         {
-            bool _result = CustomMenuAPI.Delete(WeixinConfig.AccessToken);
+            bool _result = CustomMenuAPI.Delete(WeixinConfig.AccessTokenHelper.GetToken());
             if (!_result)
                 return Content("menu删除错误！");
             return View();

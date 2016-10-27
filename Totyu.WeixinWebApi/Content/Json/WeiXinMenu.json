@@ -1,27 +1,72 @@
 ﻿{
   "button": [
     {
-      "type": "click",
-      "name": "Hello World",
-      "key": "V1001_Hello"
-    },
-    {
-      "name": "01World",
+      "name": "海外商品",
       "sub_button": [
         {
           "type": "view",
-          "name": "首页",
-          "url": "http://m.t.totyu.cn/"
+          "name": "促销活动",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA3MzE2Njc0OA==&mid=207887052&idx=1&sn=4337932e9b930b10b5aa82b2bfa1033a&scene=18#wechat_redirect"
         },
+        {
+          "type": "view",
+          "name": "新品到货",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA3MzE2Njc0OA==&mid=207970649&idx=1&sn=62fa6129790109fd4f1426d12070cf8d&scene=18#wechat_redirect"
+        },
+        {
+          "type": "view",
+          "name": "calbee麦片预售",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA3MzE2Njc0OA==&mid=207883992&idx=1&sn=7a99c3008250f3f049174b3dc392d095&scene=18#wechat_redirect"
+        },
+        {
+          "type": "view",
+          "name": "参天眼药水预售",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA3MzE2Njc0OA==&mid=208098560&idx=1&sn=54c760ef099c887cdc9489ace1b5fd47&scene=18#wechat_redirect"
+        }
+      ]
+    },
+    {
+      "name": "加盟店铺",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "东忠科技园店",
+          "url": "http://m.01world.com/Store/Home?code=hztotyu"
+        }
+      ]
+    },
+    {
+      "name": "我的01",
+      "sub_button": [
         {
           "type": "click",
           "name": "我的01",
-          "key": "V1001_My01"
+          "key": "E01World_My01"
         },
         {
           "type": "click",
           "name": "绑定账号",
-          "key": "V1001_Binding"
+          "key": "E01World_Binding"
+        },
+        {
+          "type": "click",
+          "name": "公众号支付测试",
+          "key": "E01World_Pay"
+        }
+      ]
+    },
+    {
+      "name": "APP下载",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "苹果版",
+          "url": "https://itunes.apple.com/cn/app/01shi-jie-jia-men-kou-wang/id980178856?mt=8"
+        },
+        {
+          "type": "view",
+          "name": "安卓版",
+          "url": "http://a.app.qq.com/o/simple.jsp?pkgname=com.totyu.o1world"
         }
       ]
     }
