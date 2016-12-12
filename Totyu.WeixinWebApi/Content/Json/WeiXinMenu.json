@@ -32,6 +32,21 @@
           "type": "view",
           "name": "东忠科技园店",
           "url": "http://m.01world.com/Store/Home?code=hztotyu"
+        },
+        {
+          "type": "view",
+          "name": "查询订单测试",
+          "url": "http://weixinapitest.t.totyu.cn/WeixinPay2/OrderQuery"
+        },
+        {
+          "type": "view",
+          "name": "查询退款测试",
+          "url": "http://weixinapitest.t.totyu.cn/WeixinPay2/RefundQuery"
+        },
+        {
+          "type": "view",
+          "name": "下载对账单测试",
+          "url": "http://weixinapitest.t.totyu.cn/WeixinPay2/DownloadBill"
         }
       ]
     },
@@ -41,32 +56,27 @@
         {
           "type": "click",
           "name": "我的01",
-          "key": "E01World_My01"
+          "key": "V1001_My01"
         },
         {
           "type": "click",
           "name": "绑定账号",
-          "key": "E01World_Binding"
+          "key": "V1001_Binding"
         },
         {
           "type": "click",
-          "name": "公众号支付测试",
-          "key": "E01World_Pay"
-        }
-      ]
-    },
-    {
-      "name": "APP下载",
-      "sub_button": [
+          "name": "JSAPI支付测试",
+          "key": "V1001_JSAPIPay"
+        },
         {
-          "type": "view",
-          "name": "苹果版",
-          "url": "https://itunes.apple.com/cn/app/01shi-jie-jia-men-kou-wang/id980178856?mt=8"
+          "type": "click",
+          "name": "扫码支付测试",
+          "key": "V1001_NativePay"
         },
         {
           "type": "view",
-          "name": "安卓版",
-          "url": "http://a.app.qq.com/o/simple.jsp?pkgname=com.totyu.o1world"
+          "name": "申请退款测试",
+          "url": "http://weixinapitest.t.totyu.cn/WeixinPay2/RefundOrder"
         }
       ]
     }

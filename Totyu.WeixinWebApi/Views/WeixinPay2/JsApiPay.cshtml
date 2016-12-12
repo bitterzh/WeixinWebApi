@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "JsApiPay";
+}
+
+<div align="center">
+    <form action="~/WeixinPay2/JsApiPayPost" role="form" method="post" id="jsapiForm1">
+        <div>
+            <label ID="Label3" runat="server" Style="color: #00CD00;">OpenId：<input class="textbox" id="txtOpenId" name="openid" type="text" value="@ViewBag.PayOpenId" /></label><br />
+            <br />
+        </div>
+        <br />
+        <div>
+            <label ID="Label1" runat="server" Style="color: #00CD00;">商品：价格<input class="textbox" id="txtBody" name="total_fee" type="text" value="@ViewBag.TotleFee" />元</label><br />
+            <br />
+        </div>
+        <div align="center">
+            <button id="btnSubmit" class="button" type="submit" style="background:#f49800; color:#fff;">立即购买</button>
+        </div>
+        <br />
+    </form>
+</div>
+<br />
+
+<script type="text/javascript">
+    var _data = { appId: 'wx2421b1c4370ec43b', timeStamp: '1395712654', nonceStr: 'e61463f8efa94090b1f366cccfbbb444', package: 'prepay_id=u802345jgfjsdfgsdg888', signType: 'MD5', paySign: '70EA570631E4BB79628FBCA90534C63FF7FADD89' };
+
+    //调用微信JS api 支付
+    function jsApiCall() {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            _data,
+            function (res) {
+                WeixinJSBridge.log(res.err_msg);
+                alert(res.err_code + res.err_desc + res.err_msg);
+            }
+        );
+    }
+
+    function callpay() {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener)
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }
+        else
+            jsApiCall();
+    }
+
+</script>

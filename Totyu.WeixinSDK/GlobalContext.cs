@@ -20,7 +20,7 @@ namespace Totyu.WeixinSDK
         public static string AccessToken { set; get; }
         public static string WebAccessToken { set; get; }
         public static string Domain { set; get; }
-        public static string WeixinDomain { set; get; }
+        public static string APIDomain { set; get; }
 
         #region pay
         public static string PartnerKey { set; get; }

@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "JSAPI支付";
+}
+
+<form action="~/WeixinPay/JsApiPayPost" role="form" method="post" id="jsapiForm1">    
+    <div>
+        <label ID="Label3" runat="server" Style="color: #00CD00;">OpenId：<input class="textbox" id="txtOpenId" name="openid" type="text" value="@ViewBag.PayOpenId" /></label><br />
+        <br />
+    </div>
+    <br />
+    <div>
+        <label ID="Label1" runat="server" Style="color: #00CD00;">商品一：价格为<input class="textbox" id="txtBody" name="total_fee" type="text" value="1" />分钱</label><br />
+        <br />
+    </div>
+    <div align="center">
+        <button id="btnSubmit" class="button" type="submit" style="background:#f49800; color:#fff;">立即购买</button>
+    </div>
+    <br />
+</form>
+
+<form action="~/WeixinPay/JsApiPayPost" role="form" method="post" id="jsapiForm2">
+    <div>
+        <label ID="Label3" runat="server" Style="color: #00CD00;">OpenId：<input class="textbox" id="txtOpenId" name="openid" type="text" value="@ViewBag.PayOpenId" /></label><br />
+        <br />
+    </div>
+    <br />
+    <div>
+        <label ID="Label2" runat="server" Style="color: #00CD00;">商品二：价格为<input class="textbox" id="txtBody" name="total_fee" type="text" value="2" />分钱</label><br />
+        <br />
+    </div>
+    <div align="center">
+        <button id="btnSubmit2" class="button" type="submit" style="background:#f49800; color:#fff;">立即购买</button>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    //获取共享地址
+    function editAddress()
+    {
+        WeixinJSBridge.invoke(
+            'editAddress',
+            @ViewBag.WxJsApiParam,//josn串
+                   function (res)
+                   {
+                       var addr1 = res.proviceFirstStageName;
+                       var addr2 = res.addressCitySecondStageName;
+                       var addr3 = res.addressCountiesThirdStageName;
+                       var addr4 = res.addressDetailInfo;
+                       var tel = res.telNumber;
+                       var addr = addr1 + addr2 + addr3 + addr4;
+                       alert(addr + ":" + tel);
+                   }
+               );
+    }
+
+    window.onload = function ()
+    {
+        if (typeof WeixinJSBridge == "undefined")
+        {
+            if (document.addEventListener)
+            {
+                document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+            }
+            else if (document.attachEvent)
+            {
+                document.attachEvent('WeixinJSBridgeReady', editAddress);
+                document.attachEvent('onWeixinJSBridgeReady', editAddress);
+            }
+        }
+        else
+        {
+            editAddress();
+        }
+    };
+
+</script>

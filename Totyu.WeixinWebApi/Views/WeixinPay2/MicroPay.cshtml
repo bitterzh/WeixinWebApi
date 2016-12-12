@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "刷卡支付";
+}
+<form action="~/WeixinPay2/MicroPay" role="form" method="post" id="microForm">
+    <div style="margin-left: 2%;">商品描述：</div>
+    <br />
+    <input class="textbox" id="txtBody" name="body" type="text" value="test" />
+    <br />
+    <div style="margin-left: 2%;">支付金额(分)：</div>
+    <br />
+    <input class="textbox" id="txtFee" name="fee" type="text" value="1" />
+    <br />
+    <div style="margin-left: 2%;">授权码：</div>
+    <br />
+    <input class="textbox" id="txtAuthCode" name="auth_code" type="text" value="" />
+    <br />
+    <div align="center">
+        <button id="btnSubmit" class="button" type="submit" style="background:#f49800; color:#fff;">提交刷卡</button>
+    </div>
+</form>

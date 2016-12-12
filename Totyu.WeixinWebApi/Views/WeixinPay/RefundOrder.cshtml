@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "订单退款";
+}
+<form action="~/WeixinPay/RefundOrder" role="form" method="post" id="refundOrderForm">
+    <div style="margin-left:2%;color:#f00">微信订单号和商户订单号至少填一个，微信订单号优先：</div><br />
+    <div style="margin-left:2%;">微信订单号：</div><br />
+    <input class="textbox" id="transaction_id" name="transactionId" type="text" /><br /><br />
+    <div style="margin-left:2%;">商户订单号：</div><br />
+    <input class="textbox" id="out_trade_no" name="outTradeNo" type="text" /><br /><br />
+    <div style="margin-left:2%;">订单总金额(分)：</div><br />
+    <input class="textbox" id="total_fee" name="totalFee" type="text" /><br /><br />
+    <div style="margin-left:2%;">退款金额(分)：</div><br />
+    <input class="textbox" id="refund_fee" name="refundFee" type="text" /><br /><br />
+    <div align="center">
+        <button id="btnSubmit" class="button" type="submit" >提交退款</button>        
+    </div>
+</form>

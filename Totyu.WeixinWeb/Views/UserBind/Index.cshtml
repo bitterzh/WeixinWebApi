@@ -1,0 +1,86 @@
+﻿@model com.totyu.LYWorld.Web.Models.User.LoginModel
+@using com.totyu.LYWorld.Common
+@using com.totyu.LYWorld.Common.Extentions
+@{
+    ViewBag.Title = "用户绑定";
+}
+<script type="text/javascript">
+    var type = "@ViewBag.Type";
+    var count = parseInt('@ViewBag.smsTime');   //间隔函数，1秒执行
+</script>
+
+<script src="~/Scripts/commonVal.js"></script>
+<script src="~/Scripts/js/userLogin.js"></script>
+
+<div class="shoptab">
+    <ul class="ui-grid-a">
+        <li class="ui-block-a"><em id="em1"></em><a class="denglv" href="javascript:void(0)">普通登录</a></li>
+        <li class="ui-block-b"><em id="em2"></em><a class="kuai_denglv" href="javascript:void(0)">手机动态密码登录</a></li>
+    </ul>
+</div>
+@Html.ValidationSummary(true, "", htmlAttributes: new { id = "errormsg" })
+<div data-role="fieldcontain" class="shop_tab_1" style="border-bottom: 0;">
+    <form action="/UserBind/Bind?returnUrl=@ViewBag.ReturnUrl" id="frmLogin" method="post" role="form">
+
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(m => m.Account, htmlAttributes: new { AUTOCOMPLETE = "off", data_val= "true", data_val_required= "请输入用户名/邮箱/已验证手机",placeholder = "请输入用户名/邮箱/已验证手机", @class = "login_input_username" })
+        @Html.ValidationMessageFor(m => m.Account)
+        @Html.PasswordFor(m => m.Password, htmlAttributes: new { id = "login_input_pwd", data_val = "true", data_val_required = "请输入密码", placeholder = "请输入密码", @class = "login_input_pwd" })
+        @Html.ValidationMessageFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.ValidatorCode)
+
+
+        <div class="ui-grid-a" style="@(Model==null || Model.LoginTryTimes < 3 ? "display:none" : "")">
+            <div class="ui-block-a">
+                @Html.TextBoxFor(m => m.ValidatorCode, htmlAttributes: new { AUTOCOMPLETE = "off", data_val = "true", data_val_required = "请输入验证码", placeholder = "请输入验证码", type = "number" })
+            </div>
+            <div class="ui-block-b">
+                <img id="imgValiCode" class="ui-corner-all" style="float: left; margin-left: 6px; " />
+                <a href="javascript:void(0)" id="aValiCode" style="line-height: 37px; vertical-align: middle; margin-left: 5px; color: #aaa; font-size: 0.8em; ">换一换</a>
+            </div>
+        </div>
+        @Html.ValidationMessageFor(m => m.ValidatorCode)
+        @Html.HiddenFor(m => m.Type, htmlAttributes: new { Value = "1" })
+        <button id="btnSubmit" type="button" style="background:#f49800; color:#fff;" data-role="button">登录</button>
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="text-align:left;">
+                @Html.ActionLink("免费注册", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "ui-link", style = "color:#aaa; font-size:0.8em" })
+            </div>
+            <div class="ui-block-b" style="text-align:right;">
+                <a href="ModifyPassword1" class="ui-link" style="color:#aaa; font-size:0.8em">忘记密码</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="edit_pwd1" class="shop_tab_2" style="display:none;">
+    <form action="/UserBind/Bind?returnUrl=@ViewBag.ReturnUrl" role="form" method="post" id="frmfastLogin">
+
+        @Html.AntiForgeryToken()
+
+        <div class="ui-grid-a" style="margin-top:0.8em;">
+            @*@Html.TextBoxFor(m => m.MobileNo, htmlAttributes: new { AUTOCOMPLETE = "off", data_val = "true", data_val_required = "请输入已验证手机", placeholder = "请输入已验证手机", type = "number", @class = "login_input_username" })
+            @Html.ValidationMessageFor(m => m.MobileNo)*@
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width: 57%; padding-left: 0; padding-right: 0; margin-bottom: 0.3em;">
+                    @Html.TextBoxFor(m => m.ImageValidatorCode, htmlAttributes: new { AUTOCOMPLETE = "off", data_val = "true", data_val_required = "请输入图片验证码", placeholder = "请输入图片验证码", type = "number", @class = "login_input_pwd" })
+                </div>
+                <div class="ui-block-b" style="width:43%;">
+                    <img id="imgValiCode1" class="ui-corner-all" style="float: left; margin-left: 6px; " />
+                    <a href="javascript:void(0)" id="aValiCode1" style="line-height: 37px; vertical-align: middle; margin-left: 5px; color: #aaa; font-size: 0.8em; ">换一换</a>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(m => m.ImageValidatorCode)
+            <div class="ui-block-a" style="width:57%;padding-left:0;padding-right:0;">
+                @*@Html.TextBoxFor(m => m.SMSValidatorCode, htmlAttributes: new { id = "fast_login_input_pwd", AUTOCOMPLETE = "off", data_val = "true", data_val_required = "请输入手机验证码", placeholder = "请输入手机验证码",type = "number", @class = "login_input_pwd" })
+                @Html.ValidationMessageFor(m => m.SMSValidatorCode)*@
+                @Html.HiddenFor(m => m.Type, htmlAttributes: new { Value = "2" })
+            </div>
+
+            <div class="ui-block-b" style="width:43%;"><a id="btnSendSms" class="getcode" style="width: 60%; margin-top: 0; float: left;margin-left:6px;" href="javascript:void(0)" data-role="button">获取验证码</a></div>
+
+        </div>
+
+        <button id="btnSubmit1" type="button" style="background:#f49800; color:#fff;">登录</button>
+    </form>
+</div>
+

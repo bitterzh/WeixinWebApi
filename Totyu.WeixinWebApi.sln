@@ -31,4 +31,19 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://172.16.62.94:8080/tfs/tpproject
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Totyu.WeixinSDK\\Totyu.WeixinSDK.csproj
+		SccProjectName1 = Totyu.WeixinSDK
+		SccLocalPath1 = Totyu.WeixinSDK
+		SccProjectUniqueName2 = Totyu.WeixinWebApi.Tests\\Totyu.WeixinWebApi.Tests.csproj
+		SccProjectName2 = Totyu.WeixinWebApi.Tests
+		SccLocalPath2 = Totyu.WeixinWebApi.Tests
+		SccProjectUniqueName3 = Totyu.WeixinWebApi\\Totyu.WeixinWebApi.csproj
+		SccProjectName3 = Totyu.WeixinWebApi
+		SccLocalPath3 = Totyu.WeixinWebApi
+	EndGlobalSection
 EndGlobal

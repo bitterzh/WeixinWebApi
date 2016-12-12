@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "扫码支付";
+}
+
+<form action="~/WeixinPay2/NativePay" role="form" method="get" id="nativeForm">
+    <div>商品ID：<input class="textbox" id="txtProId" name="productId" type="text" /></div>
+    <br />    
+    <br />
+    <br />
+    <div style="margin-left: 10px; color: #00CD00; font-size: 30px; font-weight: bolder;">扫码支付模式一</div>
+    <br />
+    <img id="imgModel1" src="@ViewBag.Model1" />
+    <br />
+    <br />
+    <br />
+    <div style="margin-left: 10px; color: #00CD00; font-size: 30px; font-weight: bolder;">扫码支付模式二</div>
+    <br />
+    <img id="imgModel2" src="@ViewBag.Model2" />
+    <button id="btnSubmit" class="button" type="submit" style="background:#f49800; color:#fff;">显示二维码</button>
+</form>

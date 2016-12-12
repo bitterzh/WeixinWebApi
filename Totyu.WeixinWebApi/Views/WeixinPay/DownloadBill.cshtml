@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "下载账单";
+}
+
+<form action="~/WeixinPay/DownloadBill" role="form" method="post" id="downloadBillForm">
+    <div style="margin-left:2%;">对账日期：</div><br />
+    <input class="textbox" id="bill_date" name="billDate" type="text" /><br /><br />
+    <div style="margin-left:2%;">账单类型：</div><br />
+    <select id="bill_type" name="billType" style="width:96%;height:35px;margin-left:2%;">
+        <option id="ALL" value="ALL">所有订单信息</option>
+        <option id="SUCCESS" value="SUCCESS">成功支付的订单</option>
+        <option id="REFUND" value="REFUND">退款订单</option>
+        <option id="REVOKED" value="REVOKED">撤销的订单</option>
+    </select>
+    <br /><br />
+    <div align="center">
+        <button id="btnSubmit" class="button" type="submit">下载对账单</button>        
+    </div>
+</form>

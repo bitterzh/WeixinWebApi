@@ -319,7 +319,9 @@
             /// step 1(web)
             /// http请求方式: GET
             /// 用户同意授权，获取code
-            /// snsapi_userinfo
+            /// snsapi_userinfo     //微信用户信息授权    
+            /// snsapi_login        //微信OpenId授权
+            /// snsapi_base
             /// </summary>
             public static string GetCodeOauth2 = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect";
             /// <summary>

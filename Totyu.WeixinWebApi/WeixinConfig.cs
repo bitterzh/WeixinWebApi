@@ -52,6 +52,7 @@ namespace Totyu.WeixinWebApi
             WeixinSDK.GlobalContext.AccessToken = AccessToken;
             WeixinSDK.GlobalContext.WebAccessToken = WebAccessToken;
             WeixinSDK.GlobalContext.Domain = Domain;
+            WeixinSDK.GlobalContext.APIDomain = APIDomain;
             WeixinSDK.GlobalContext.MCHId = mch_id;
             WeixinSDK.GlobalContext.PartnerKey = PartnerKey;
             WeixinSDK.GlobalContext.DeviceInfo = DeviceInfo;
