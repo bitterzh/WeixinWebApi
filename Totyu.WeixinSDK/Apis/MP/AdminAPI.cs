@@ -80,5 +80,17 @@ namespace Totyu.WeixinSDK.Apis.MP
             return GetStreamAsync(url);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accessToekn"></param>
+        /// <param name="openId"></param>
+        /// <param name="lang"></param>
+        /// <returns></returns>
+        public static dynamic GetUserList(string accessToekn, string nextId = "")
+        {
+            var url = string.Format(ApiUrlHelper.MPApiUrl.GetUserList, accessToekn, nextId);
+            return GetJsonAsync(url);
+        }
     }
 }

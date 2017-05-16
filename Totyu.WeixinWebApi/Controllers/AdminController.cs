@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Web.Mvc;
 using Totyu.WeixinSDK.Apis.MP;
+using Totyu.WeixinSDK.Entiyies.Dynamic;
 using Totyu.WeixinWebApi.Models;
 
 namespace Totyu.WeixinWebApi.Controllers
@@ -55,6 +56,18 @@ namespace Totyu.WeixinWebApi.Controllers
                 Image = Image.FromStream(_data),
                 ImageFormat = ImageFormat.Png
             };
+        }
+
+
+
+        public void GetUserList()
+        {
+            dynamic userinfo = AdminAPI.GetUserList(WeixinConfig.AccessTokenHelper.GetToken());
+
+            foreach (var _id in userinfo.data.openid)
+            {
+                ReplayActiveMessageAPI.RepayText(WeixinConfig.AccessTokenHelper.GetToken(), _id, "Hello");
+            }
         }
 
     }
